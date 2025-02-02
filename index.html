@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>sidebar-v2 example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/><meta charset="utf-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="leaflet-sidebar.css" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      html,
+      body,
+      #map {
+        height: 100%;
+        font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+<body>
+    <div id="sidebar" class="sidebar sidebar--collapsed">
+      <!-- Nav tabs -->
+      <div class="sidebar__tabs">
+        <ul role="tablist" class="tabs__list">
+          <li class="tabs__item"><a href="#home" role="tab" class="tabs__link"><i class="fa fa-bars"></i></a></li>
+        </ul>
+
+        <ul role="tablist" class="tabs__list">
+          <li class="tabs__item tabs__item--disabled"><a href="#settings" role="tab" class="tabs__link"><i class="fa fa-gear"></i></a></li>
+        </ul>
+      </div>
+
+
+      <!-- Tab panes -->
+      <div class="sidebar__content">
+        <div class="sidebar__pane" id="home">
+            <div class="pane__header">
+                <h1 class="pane__title">sidebar-v2</h1>
+                <span class="pane__close"><i class="fa fa-caret-left"></i></span>
+            </div>
+            <div class="pane__content">
+                <p> A responsive sidebar for mapping libraries like </p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="map" class="sidebar-map"></div>
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="leaflet-sidebar.js"></script>
+    <script>
+      var map = L.map("map");
+      map.setView([51.2, 7], 9);
+      L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: "Map data &copy; OpenStreetMap contributors"
+      }).addTo(map);
+      var marker = L.marker([51.2, 7]).addTo(map);
+      var sidebar = L.control.sidebar("sidebar").addTo(map);
+    </script>
+  </body>
+</html>
