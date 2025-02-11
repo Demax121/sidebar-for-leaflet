@@ -26,7 +26,7 @@ L.Control.Sidebar = L.Control.extend({
         // Store tab items and panes
         this._tabitems = this._sidebar.querySelectorAll('.sidebar__tabs li');
         this._panes = this._container.querySelectorAll('.sidebar__pane');
-        this._closeButtons = this._sidebar.querySelectorAll('.pane__close');
+        this._closeButtons = this._sidebar.querySelectorAll('.sidebar__pane-close');
     },
 
     addTo: function (map) {
@@ -90,7 +90,7 @@ L.Control.Sidebar = L.Control.extend({
             L.DomUtil.removeClass(this._sidebar, 'sidebar--collapsed');
         }
 
-        this.fire('pane__content', { id: id });
+        this.fire('sidebar__pane-content', { id: id });
         return this;
     },
 
@@ -112,7 +112,7 @@ L.Control.Sidebar = L.Control.extend({
     _handleTabClick: function(tab) {
         if (L.DomUtil.hasClass(tab, 'active')) {
             this.close();
-        } else if (!L.DomUtil.hasClass(tab, 'tabs__item--disabled')) {
+        } else if (!L.DomUtil.hasClass(tab, 'sidebar__tabs-item--disabled')) {
             this.open(tab.querySelector('a').hash.slice(1));
         }
     }
