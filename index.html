@@ -3,9 +3,9 @@
   <head>
     <title>sidebar-v2 example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/><meta charset="utf-8" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"/>
-    <link rel="stylesheet" href="leaflet-sidebar.css" />
+    <script src="https://kit.fontawesome.com/ac1f4a65d4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="leaflet/leaflet.css"/>
+    <link rel="stylesheet" href="leaflet/leaflet-sidebar.css" />
     <style>
       body {
         padding: 0;
@@ -31,8 +31,6 @@
           <li class="tabs__item tabs__item--disabled"><a href="#settings" role="tab" class="tabs__link"><i class="fa fa-gear"></i></a></li>
         </ul>
       </div>
-
-
       <!-- Tab panes -->
       <div class="sidebar__content">
         <div class="sidebar__pane" id="home">
@@ -46,10 +44,16 @@
         </div>
       </div>
     </div>
+
+
+
+
     <div id="map" class="sidebar-map"></div>
-    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-    <script src="leaflet-sidebar.js"></script>
+    <script src="leaflet/leaflet.js"></script>
+    <script src="leaflet/leaflet-sidebar.js"></script>
     <script>
+
+      
       var map = L.map("map");
       map.setView([51.2, 7], 9);
       L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
