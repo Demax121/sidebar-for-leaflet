@@ -15,16 +15,16 @@ L.Control.Sidebar = L.Control.extend({
         this._sidebar = L.DomUtil.get(id);
         this._container = this._sidebar.querySelector('.sidebar__content');
         
-        // Add positioning class
-        L.DomUtil.addClass(this._sidebar, 'sidebar--' + this.options.position);
+        // Add positioning class following BEM conventions
+        L.DomUtil.addClass(this._sidebar, `sidebar--${this.options.position}`);
         
         // Add touch styling if needed
         if (L.Browser.touch) {
             L.DomUtil.addClass(this._sidebar, 'leaflet-touch');
         }
 
-        // Store tab items and panes
-        this._tabitems = this._sidebar.querySelectorAll('.sidebar__tabs li');
+        // Store interactive elements using BEM selectors
+        this._tabitems = this._sidebar.querySelectorAll('.sidebar__tabs-item');
         this._panes = this._container.querySelectorAll('.sidebar__pane');
         this._closeButtons = this._sidebar.querySelectorAll('.sidebar__pane-close');
     },
@@ -34,7 +34,7 @@ L.Control.Sidebar = L.Control.extend({
 
         // Add click handlers
         this._tabitems.forEach(item => {
-            const link = item.querySelector('a');
+            const link = item.querySelector('.sidebar__tabs-link');
             if (link?.getAttribute('href')?.startsWith('#')) {
                 L.DomEvent
                     .on(link, 'click', L.DomEvent.preventDefault)
@@ -52,7 +52,7 @@ L.Control.Sidebar = L.Control.extend({
     remove: function () {
         // Remove click handlers
         this._tabitems.forEach(item => {
-            const link = item.querySelector('a');
+            const link = item.querySelector('.sidebar__tabs-link');
             L.DomEvent.off(link, 'click');
         });
 
@@ -68,19 +68,19 @@ L.Control.Sidebar = L.Control.extend({
         // Update pane visibility
         this._panes.forEach(pane => {
             if (pane.id === id) {
-                L.DomUtil.addClass(pane, 'active');
+                L.DomUtil.addClass(pane, 'sidebar__pane--active');
             } else {
-                L.DomUtil.removeClass(pane, 'active');
+                L.DomUtil.removeClass(pane, 'sidebar__pane--active');
             }
         });
 
         // Update tab highlighting
         this._tabitems.forEach(item => {
-            const link = item.querySelector('a');
+            const link = item.querySelector('.sidebar__tabs-link');
             if (link.hash === '#' + id) {
-                L.DomUtil.addClass(item, 'active');
+                L.DomUtil.addClass(item, 'sidebar__tabs-item--active');
             } else {
-                L.DomUtil.removeClass(item, 'active');
+                L.DomUtil.removeClass(item, 'sidebar__tabs-item--active');
             }
         });
 
@@ -90,14 +90,14 @@ L.Control.Sidebar = L.Control.extend({
             L.DomUtil.removeClass(this._sidebar, 'sidebar--collapsed');
         }
 
-        this.fire('sidebar__pane-content', { id: id });
+        this.fire('pane__content', { id: id });
         return this;
     },
 
     close: function() {
         // Remove active highlights
         this._tabitems.forEach(item => {
-            L.DomUtil.removeClass(item, 'active');
+            L.DomUtil.removeClass(item, 'sidebar__tabs-item--active');
         });
 
         // Collapse sidebar
@@ -110,10 +110,10 @@ L.Control.Sidebar = L.Control.extend({
     },
 
     _handleTabClick: function(tab) {
-        if (L.DomUtil.hasClass(tab, 'active')) {
+        if (L.DomUtil.hasClass(tab, 'sidebar__tabs-item--active')) {
             this.close();
         } else if (!L.DomUtil.hasClass(tab, 'sidebar__tabs-item--disabled')) {
-            this.open(tab.querySelector('a').hash.slice(1));
+            this.open(tab.querySelector('.sidebar__tabs-link').hash.slice(1));
         }
     }
 });

@@ -80,8 +80,9 @@
   transition: all 80ms;
 }
 .sidebar__tabs-item:hover,
-.sidebar__tabs-item.active {
+.sidebar__tabs-item--active {
   background-color: var(--active-hover-crl);
+  
 }
 
 .sidebar__tabs-item--disabled {
@@ -135,7 +136,7 @@
   box-sizing: border-box;
   padding: 1rem 2rem;
 }
-.sidebar__pane.active {
+.sidebar__pane--active {
   display: block;
 }
 
